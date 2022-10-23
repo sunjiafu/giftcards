@@ -28,8 +28,8 @@ class Sessions extends Bar
         $this->title('收入');
         // 设置下拉选项
         $this->dropdown([
-            'today' => '今天',
             '7' => 'Last 7 Days',
+            'today' => '今天',
             '30' => 'Last Month',
         ]);
         // 设置图表颜色
