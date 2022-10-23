@@ -2,8 +2,11 @@
 
 namespace App\Admin\Metrics\Examples;
 
+use App\Models\Order;
+use Carbon\Carbon;
 use Dcat\Admin\Widgets\Metrics\RadialBar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Tickets extends RadialBar
 {
@@ -14,15 +17,15 @@ class Tickets extends RadialBar
     {
         parent::init();
 
-        $this->title('Tickets');
+        $this->title('订单');
         $this->height(400);
         $this->chartHeight(300);
-        $this->chartLabels('Completed Tickets');
+        $this->chartLabels('转化率');
         $this->dropdown([
+            'today' => '今天',
             '7' => 'Last 7 Days',
-            '28' => 'Last 28 Days',
             '30' => 'Last Month',
-            '365' => 'Last Year',
+           
         ]);
     }
 
@@ -35,19 +38,47 @@ class Tickets extends RadialBar
      */
     public function handle(Request $request)
     {
+        $endtime = Carbon::now();
         switch ($request->get('option')) {
-            case '365':
-            case '30':
-            case '28':
             case '7':
+                $startTime = Carbon::now()->subDays(7);
+                break;
+            case '30':
+                $startTime = Carbon::now()->subDays(30);
+                break;
+
+            case 'todday':
             default:
-                // 卡片内容
-                $this->withContent(162);
-                // 卡片底部
-                $this->withFooter(29, 63, '1d');
-                // 图表数据
-                $this->withChart(83);
+                $startTime = Carbon::now();
         }
+
+        $order = Order::query()
+            ->where('created_at', '>=', $startTime)
+            ->where('created_at', '<=', $endtime)
+            ->select('status', DB::raw('count(id) as num'))
+            ->groupBy('status')
+            ->pluck('num', 'status')
+            ->toArray();
+
+        $completed = $order[Order::STATUS_COMPLETED] ?? 0;
+
+
+
+
+
+        $orderCount = array_sum($order);
+        if ($orderCount == 0) {
+            $successRate = 0;
+        } else {
+            $rate = bcdiv($completed, $orderCount, 2);
+            $successRate = bcmul($rate, 100);
+        }
+        // 卡片内容
+        $this->withContent($orderCount);
+        // 卡片底部
+        $this->withFooter($completed, 63, '1d');
+        // 图表数据
+        $this->withChart($successRate);
     }
 
     /**
@@ -77,7 +108,7 @@ class Tickets extends RadialBar
             <<<HTML
 <div class="d-flex flex-column flex-wrap text-center">
     <h1 class="font-lg-2 mt-2 mb-0">{$content}</h1>
-    <small>Tickets</small>
+    <small>订单总数</small>
 </div>
 HTML
         );
@@ -98,7 +129,7 @@ HTML
             <<<HTML
 <div class="d-flex justify-content-between p-1" style="padding-top: 0!important;">
     <div class="text-center">
-        <p>New Tickets</p>
+        <p>已完成订单</p>
         <span class="font-lg-1">{$new}</span>
     </div>
     <div class="text-center">

@@ -5,6 +5,9 @@ namespace App\Admin\Metrics\Examples;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Widgets\Metrics\Bar;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Models\Order;
 
 class Sessions extends Bar
 {
@@ -22,13 +25,12 @@ class Sessions extends Bar
         // 卡片内容宽度
         $this->contentWidth(5, 7);
         // 标题
-        $this->title('Avg Sessions');
+        $this->title('收入');
         // 设置下拉选项
         $this->dropdown([
+            'today' => '今天',
             '7' => 'Last 7 Days',
-            '28' => 'Last 28 Days',
             '30' => 'Last Month',
-            '365' => 'Last Year',
         ]);
         // 设置图表颜色
         $this->chartColors([
@@ -50,20 +52,41 @@ class Sessions extends Bar
      */
     public function handle(Request $request)
     {
+        $endTime = Carbon::now();
         switch ($request->get('option')) {
             case '7':
+                $startTime = Carbon::now()->subDays(7);
+                break;
+            case '30':
+                $startTime = Carbon::now()->subDays(30);
+                break;
+            case 'today':
+                $startTime = Carbon::today();
+                break;
             default:
-                // 卡片内容
-                $this->withContent('2.7k', '+5.2%');
-
-                // 图表数据
-                $this->withChart([
-                    [
-                        'name' => 'Sessions',
-                        'data' => [75, 125, 225, 175, 125, 75, 25],
-                    ],
-                ]);
+                $startTime =  Carbon::now()->subDays(7);
         }
+
+        $orderGroup = Order::query()
+            ->where('created_at', '>=', $startTime)
+            ->where('created_at', '<=', $endTime)
+            ->where('status', '=' ,Order::STATUS_COMPLETED)
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('sum(price) as price'))
+            ->groupBy('date')
+            ->pluck('price')
+            ->toArray();
+        $totalPrice = array_sum($orderGroup);
+
+        // 卡片内容
+        $this->withContent($totalPrice.'$', '+5.2%');
+
+        // 图表数据
+        $this->withChart([
+            [
+                'name' => '订单金额',
+                'data' =>  $orderGroup,
+            ],
+        ]);
     }
 
     /**
