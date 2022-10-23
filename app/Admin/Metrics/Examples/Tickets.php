@@ -49,7 +49,7 @@ class Tickets extends RadialBar
 
             case 'todday':
             default:
-                $startTime = Carbon::now();
+                $startTime = Carbon::today();
         }
 
         $order = Order::query()
