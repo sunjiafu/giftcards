@@ -61,6 +61,7 @@ class Tickets extends RadialBar
             ->toArray();
 
         $completed = $order[Order::STATUS_COMPLETED] ?? 0;
+        $expired = $order[Order::STATUS_EXPIRED] ?? 0;
 
 
 
@@ -76,7 +77,7 @@ class Tickets extends RadialBar
         // 卡片内容
         $this->withContent($orderCount);
         // 卡片底部
-        $this->withFooter($completed, 63, '1d');
+        $this->withFooter($completed, $expired, '1d');
         // 图表数据
         $this->withChart($successRate);
     }
@@ -133,7 +134,7 @@ HTML
         <span class="font-lg-1">{$new}</span>
     </div>
     <div class="text-center">
-        <p>Open Tickets</p>
+        <p>未完成订单</p>
         <span class="font-lg-1">{$open}</span>
     </div>
     <div class="text-center">
