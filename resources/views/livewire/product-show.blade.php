@@ -70,6 +70,7 @@
                                 ${{$price}}
 
 
+
                             </span>
                         </div>
                         @endif
@@ -164,9 +165,10 @@
                     <h3 class="sr-only">Customer Reviews ({{$reviews->total()}})</h3>
                     @foreach ($reviews as $review)
                     <div class="flex text-sm text-gray-500 space-x-4">
-
+                    
                         <div class="py-10 pl-12  border-t border-gray-200">
-                            <h3 class="font-medium text-gray-900">{{$review->name}}</h3>
+                            <h3 class="font-medium text-gray-900">{{$review->user_name}}</h3>
+                       
                             <p><time datetime="2021-07-16">
                                     Published {{\Carbon\Carbon::parse($review->date)->locale('en')->diffForHumans()}}
                                 </time></p>
