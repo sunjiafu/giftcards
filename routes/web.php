@@ -46,3 +46,4 @@ Route::get('support', Support::class)->name('support');
 Route::get('reviews', Reviews::class)->name('reviews');
 Route::post('btcpay/notifyurl', 'App\Http\Controllers\pay\BitcoinContorller@notifyUrl');
 Route::post('usdtpay/notifyurl', [UsdtController::class, 'notifyUrl']);
+Route::get('usdtpay/return_url',  [UsdtController::class, 'returnUrl'])->name('usdt-return');

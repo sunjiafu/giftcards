@@ -46,8 +46,10 @@ class UsdtController extends Controller
     public function returnUrl(Request $request)
     {
 
+        $oid = $request->get('order_id');
+
         // 异步通知还没到就跳转了，所以这里休眠2秒
         sleep(2);
-        return redirect()->to('order');
+        return redirect(url('orderdeail',$oid));
     }
 }

@@ -5,7 +5,7 @@ namespace App\Service\Pay;
 use GuzzleHttp\Client;
 
 
-class Usdtpay
+class Usdtpay  
 {
 
     public function CreateInvoice(float $amount, string $orderId)
@@ -16,8 +16,8 @@ class Usdtpay
 
             "amount" => $amount,
             "order_id" => $orderId,
-            'redirect_url' => 'http://www.baidu.com',
-            'notify_url' => 'https://www.buyteglegram.com/order'
+            'redirect_url' => url('orderdeail', $orderId),
+            'notify_url' => url('usdtpay' . '/notify_url')
 
 
         ];
@@ -28,6 +28,7 @@ class Usdtpay
         $response = $client->post("https://usdt.giftcardssupplier.com/api/v1/order/create-transaction", ['body' => json_encode($parameter)]);
         $body = json_decode($response->getBody()->getContents(), true);
 
+    
         return $body;
     }
     public function epusdtSign(array $parameter, string $signKey)

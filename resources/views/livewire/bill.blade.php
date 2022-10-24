@@ -71,7 +71,9 @@
                         </div>
                     </button>
                     @endif
-
+                    <div wire:loading wire:target="checkout">
+        Processing Payment...
+    </div>
                     @if($order->status ==-1)
                     <div id="alert-additional-content-1" class="p-4 mb-4 border border-blue-300 rounded-lg bg-blue-50 dark:bg-blue-300" role="alert">
   <div class="flex items-center">
