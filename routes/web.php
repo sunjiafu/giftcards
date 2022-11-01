@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategorylistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Bill;
 use App\Http\Livewire\Home;
@@ -9,7 +10,16 @@ use App\Http\Livewire\OrderSearchByemail;
 use App\Http\Livewire\Product;
 use App\Http\Livewire\Reviews;
 use App\Http\Controllers\pay\UsdtController;
+use App\Http\Controllers\Telegram\SetwebhookController;
+use App\Http\Controllers\Telegram\FrontController;
+use App\Http\Controllers\Telegram\ProductController;
+use App\Http\Controllers\Telegram\WebhookController;
 use App\Http\Livewire\Support;
+use App\Telegram\Handlers\MyWebhookHandler;
+use Illuminate\Http\Request;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +30,7 @@ use App\Http\Livewire\Support;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 
 
@@ -36,6 +47,7 @@ Route::middleware([
 Route::get('/', Home::class)->name('home');
 Route::get('orderdeail/{order_sn}', Orderdeail::class);
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 
 Route::get('product/{url}', ProductShow::class)->name('show');
@@ -47,3 +59,6 @@ Route::get('reviews', Reviews::class)->name('reviews');
 Route::post('btcpay/notifyurl', 'App\Http\Controllers\pay\BitcoinContorller@notifyUrl');
 Route::post('usdtpay/notifyurl', [UsdtController::class, 'notifyUrl']);
 Route::get('usdtpay/return_url',  [UsdtController::class, 'returnUrl'])->name('usdt-return');
+Route::post('telegram/webhook', [WebhookController::class, 'webhook']);
+Route::get('callback', [CategorylistController::class, 'sendmessage']);
+Route::get('getkey', [MyWebhookHandler::class, 'productcate']);

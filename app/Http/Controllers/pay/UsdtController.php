@@ -24,9 +24,11 @@ class UsdtController extends Controller
     {
         $data = $request->all();
         
-        if (!$data) {
+         if (!$data) {
             return 'fail';
         }
+
+                                                   
     
         $signature = $this->usdtpay->epusdtSign($data, 'giftcardsdeal');
         if ($data['signature'] != $signature) { //不合法的数据
@@ -35,7 +37,6 @@ class UsdtController extends Controller
             //合法的数据
             //业务处理
 
-        
 
             $this->ops->completedOrder($data['order_id']);
           

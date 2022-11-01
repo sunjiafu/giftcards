@@ -9,6 +9,7 @@ use Dcat\Admin\Layout\Column;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 
+
 class HomeController extends Controller
 {
     public function index(Content $content)
@@ -33,7 +34,7 @@ class HomeController extends Controller
               
                 });
 
-                
+         
 
          
             });

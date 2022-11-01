@@ -33,7 +33,7 @@ class Btcpay
       $this->storeId = $this->paygetway->store_id;
    }
 
-   public  function CreateInvoice(?PreciseNumber $amount = null, ?string $orderId, string $buyerEmail)
+   public  function CreateInvoice(?PreciseNumber $amount = null, ?string $orderId, string $buyerEmail = null)
    {
 
       //加载网关

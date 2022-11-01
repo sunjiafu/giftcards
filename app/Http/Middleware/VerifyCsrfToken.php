@@ -14,7 +14,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         
         'btcpay/*',
-        'usdtpay/*'
+        'usdtpay/*',
+        'telegram/webhook'
         //
     ];
 }

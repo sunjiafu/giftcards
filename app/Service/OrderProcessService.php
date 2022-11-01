@@ -20,7 +20,7 @@ class OrderProcessService
     public function OrderSarchByemail($buyermail)
     {
 
-        $order = Order::where('buyeremail', $buyermail)->orderBy('updated_at','desc')->take(5)->get();
+        $order = Order::where('buyeremail', $buyermail)->orderBy('updated_at', 'desc')->take(5)->get();
 
         return $order;
     }
@@ -43,20 +43,117 @@ class OrderProcessService
         return $code;
     }
 
-        /**
+    /**
      * 价格和国家设置
      *
-     * @param int $amount 价格设置
-     *  @param string $country 价格设置
-     * 
      *
+     * @param string $country 价格设置
+     * 
+     * 
+     * @param float $price
+     * 
+     * 
      
      */
 
-    
+    public function Price($country, $amount)
+    {
 
 
- 
+        if ($country == 'USA') {
+
+            switch ($amount) {
+
+                case (50):
+
+                    $price = 40;
+                    break;
+                case (100):
+
+                    $price  = 65;
+                    break;
+                case (200):
+
+                    $price  = 120;
+                    break;
+                case (500):
+
+                    $price  = 210;
+                    break;
+                case (1000):
+
+                    $price  = 350;
+                    break;
+                case (2000):
+
+                    $price  = 580;
+                    break;
+            }
+        } elseif ($country == 'UK') {
+
+            switch ($amount) {
+
+                case (50):
+
+                    $price  = 54.24;
+                    break;
+                case (100):
+
+                    $price  = 88.24;
+                    break;
+                case (200):
+
+                    $price  = 159;
+                    break;
+                case (500):
+
+                    $price  = 278;
+                    break;
+                case (1000):
+
+                    $price  = 350;
+                    break;
+                case (2000):
+
+                    $price  = 580;
+                    break;
+            }
+        } elseif ($country == 'EU') {
+
+            switch ($amount) {
+
+                case (50):
+
+                    $price  = 45;
+                    break;
+                case (100):
+
+                    $price  = 74;
+                    break;
+                case (200):
+
+                    $price  = 136;
+                    break;
+                case (500):
+
+                    $price  = 238;
+                    break;
+                case (1000):
+
+                    $price  = 238;
+                    break;
+                case (2000):
+
+                    $price  = 580;
+                    break;
+            }
+        }
+
+        return $price;
+    }
+
+
+
 
     /**
      * 通过id集合设置卡密已售出
