@@ -15,8 +15,8 @@ use App\Service\OrderProcessService;
 use App\Service\Pay\Usdtpay;
 use App\Service\Pay\Btcpay;
 use BTCPayServer\Util\PreciseNumber;
-
-
+use DefStudio\Telegraph\Keyboard\ReplyButton;
+use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
 
 class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
@@ -35,7 +35,10 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function start(): void
     {
 
+        $this->chat->markdown("\n\n")->replyKeyboard(ReplyKeyboard::make()->buttons([
+        ReplyButton::make('Reviews')
 
+        ]))->send();
         $this->chat->markdown("
         *Buy Giftcards Online best offer*
  
@@ -54,6 +57,8 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
             )
             ->send();
+
+            
     }
 
     public function Product()
