@@ -17,6 +17,7 @@ use App\Service\Pay\Btcpay;
 use BTCPayServer\Util\PreciseNumber;
 use DefStudio\Telegraph\Keyboard\ReplyButton;
 use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
+use Illuminate\Support\Stringable;
 
 class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
@@ -306,5 +307,16 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 $this->chat->markdown('Your order is pending payment')->send();
                 break;
         }
+    }
+
+    
+    protected function handleChatMessage(Stringable $text): void
+    {
+         switch($text){
+
+            case 'Reviews':
+                $this->chat->markdown('reviews')->send();
+                break;
+         }
     }
 }
