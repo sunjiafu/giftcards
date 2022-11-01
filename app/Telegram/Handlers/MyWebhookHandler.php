@@ -35,8 +35,9 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function start(): void
     {
 
-        $this->chat->markdown("\n\n")->replyKeyboard(ReplyKeyboard::make()->buttons([
-        ReplyButton::make('Reviews')
+        $this->chat->markdown("🎉Welcome to Giftcard Discount bot🎉")->replyKeyboard(ReplyKeyboard::make()->buttons([
+            ReplyButton::make('Reviews'),
+            ReplyButton::make('All Giftcard')
 
         ]))->send();
         $this->chat->markdown("
@@ -57,8 +58,6 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
             )
             ->send();
-
-            
     }
 
     public function Product()
