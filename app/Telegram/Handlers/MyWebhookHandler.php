@@ -364,12 +364,12 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 foreach ($orders as $order) {
 
                     if ($order['status'] == Order::STATUS_COMPLETED) {
-                        $order['status'] = __('order.fields.status_expired');
+                        $order['status'] = __('rder.fields.status_completed');
                     } elseif ($order['status'] == Order::STATUS_WAIT_PAY) {
                         $order['status'] = 'Waitting Pay';
-                    } elseif ($order['status']== Order::STATUS_COMPLETED) {
+                    } elseif ($order['status']== Order::STATUS_EXPIRED) {
 
-                        $order['status'] = __('order.fields.status_completed');
+                        $order['status'] = __('order.fields.status_expired');
                         # code...
                     }
                     $this->chat->markdown(
