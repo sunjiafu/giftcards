@@ -344,34 +344,40 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                     ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
                     ->send();
                 break;
-            case '💳Myorder':
-                $buyeremail = $this->chat->chat_id . '@giftcardssupplier.com';
-                $orders = Order::where('buyeremail', $buyeremail)->orderBy('updated_at', 'desc')->take(5)->get();
+         
+        }
+        
+        if($text == '💳Myorder'){
 
-           
+            $buyeremail = $this->chat->chat_id . '@giftcardssupplier.com';
+            $orders = Order::where('buyeremail', $buyeremail)->orderBy('updated_at', 'desc')->take(5)->get();
 
-                foreach ($orders as $order) {
+       
 
-                    if (!$orders->title) {
-                        $this->chat->markdown('You dont have order')->send();
-                    }
+            foreach ($orders as $order) {
 
-
-                    $this->chat->markdown(
-                        'OrderId:' . $order->order_sn . "\n\n" .
-                            'Product:' . $order->title . "\n\n" .
-                            'Price:' . $order->price . "\n\n" .
-                            'Code:' . $order->code
-                    )
-
-                        ->send();
+                if (!$orders->title) {
+                    $this->chat->markdown('You dont have order')->send();
                 }
 
 
+                $this->chat->markdown(
+                    'OrderId:' . $order->order_sn . "\n\n" .
+                        'Product:' . $order->title . "\n\n" .
+                        'Price:' . $order->price . "\n\n" .
+                        'Code:' . $order->code
+                )
+
+                    ->send();
+            }
 
 
-
-                break;
         }
+           
+
+
+
+
+
     }
 }
