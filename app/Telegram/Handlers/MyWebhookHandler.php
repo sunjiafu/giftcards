@@ -327,22 +327,37 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
         switch ($text) {
 
-         
+
 
             case '👉Reviews':
                 $this->chat->markdown(giftcard_config_get('reviews'))
-                ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
-                ->send();
+                    ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
+                    ->send();
                 break;
             case '🛒All Giftcard':
                 $this->chat->markdown(giftcard_config_get('allgiftcard'))
-                ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
-                ->send();
+                    ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
+                    ->send();
                 break;
             case '☎️Support':
                 $this->chat->markdown(giftcard_config_get('support'))
-                ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
-                ->send();
+                    ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
+                    ->send();
+                break;
+            case '🎫Myorder':
+                $buyeremail = $this->chat->chat_id . '@giftcardssupplier.com';
+                $orders = $this->ops->OrderSarchByemail($buyeremail);
+
+                if (!$orders) {
+                    $this->chat->markdown('you dont have an order')->send();
+                }
+
+                foreach($orders as $order)
+
+                $this->chat->message($order)->send();
+
+
+
                 break;
         }
     }
