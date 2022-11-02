@@ -330,10 +330,10 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
          
 
             case '👉Reviews':
-                $this->chat->markdown("
-               Reviews")->send();
+                $this->chat->markdown(giftcard_telegram_get('reviews'))->send();
                 break;
             case '🛒All Giftcard':
+                $this->chat->markdown(giftcard_telegram_get('allgiftcard'))->send();
                 break;
             case '☎️Support':
                 $this->chat->markdown(giftcard_config_get('support'))
