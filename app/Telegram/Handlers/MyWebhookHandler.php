@@ -43,7 +43,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             ReplyButton::make('🛎️Support'),
             ReplyButton::make('🎫Myorder')
 
-        ])->resize())->send();
+        ])->chunk(2))->send();
         $this->chat->markdown("
         *Buy Giftcards Online best offer*
  
@@ -326,10 +326,10 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         switch ($text) {
 
-            case 'Reviews':
+            case '👉Reviews':
                 $this->chat->markdown('reviews')->send();
                 break;
-            case 'All Giftcard':
+            case '🛒All Giftcard':
 
                 break;
         }
