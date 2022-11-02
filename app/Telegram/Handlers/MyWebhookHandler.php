@@ -335,7 +335,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             case '☎️Support':
                 $this->chat->markdown('*24/7 Customer Service Support*
 [24/7 Support Giftcards](https://wa.me/31623518851/)
-[DiscountGiftcard_support](tg://user?id=1943597638)')
+[DiscountGiftcard_support](https://t.me/DiscountGiftcard_support)')
                 ->send();
                 break;
         }
