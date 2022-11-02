@@ -15,11 +15,11 @@ class CategorylistController extends TestCase
     {
       
 
-        TelegramSendmessage::dispatch();
+        $reviews =giftcard_config_get('content');
         
         // ...
 
-        response('ok',200);
+dd($reviews);
     }
 
    

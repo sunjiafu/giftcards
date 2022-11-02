@@ -51,8 +51,8 @@ if (! function_exists('giftcard_telegram_get')) {
      */
     function giftcard_telegram_get(string $key, $default = null)
     {
-       $sysConfig = Cache::get('tgsend-reviews');
-       return $sysConfig[$key] ?? $default;
+       $tgConfig = Cache::get('tgsend-reviews');
+       return   $tgConfig[$key] ?? $default;
     }
 
     

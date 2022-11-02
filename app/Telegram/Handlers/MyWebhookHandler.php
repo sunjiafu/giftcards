@@ -324,7 +324,10 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     //处理replykeyboard信息
     protected function handleChatMessage(Stringable $text): void
     {
+
         switch ($text) {
+
+         
 
             case '👉Reviews':
                 $this->chat->markdown("
@@ -333,7 +336,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             case '🛒All Giftcard':
                 break;
             case '☎️Support':
-                $this->chat->markdown("{giftcard_telegram_get('content')}")
+                $this->chat->markdown(giftcard_config_get('support'))
                 ->send();
                 break;
         }

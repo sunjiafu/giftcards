@@ -33,7 +33,23 @@ class SystemSetting extends Form
 
             $this->text('title','网站名称')->required();
 
-        });
+        }
+    
+    );
+
+    $this->tab('TelggramBot', function () {
+
+        $this->markdown('support','服务支持回复内容')->required();
+
+        $this->markdown('reviews','评论回复内容')->required();
+
+        $this->markdown('allgiftcard','所有礼品卡回复内容')->required();
+
+    }
+
+);
+
+
     }
 
     /**
