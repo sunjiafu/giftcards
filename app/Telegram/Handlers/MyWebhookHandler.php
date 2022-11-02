@@ -354,7 +354,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
                 foreach($orders as $order)
 
-                $this->chat->message($order)->send();
+                $this->chat->markdown($order)->send();
 
 
 
