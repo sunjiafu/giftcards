@@ -23,4 +23,5 @@ Route::group([
 
     $router->get('import-carmis', 'CarmiController@importCarmis');
     $router->get('system-set', 'SystemSettingController@systemSetting');
+    $router->get('tgsendreviews','SystemSettingController@tgSendreviews');
 });
