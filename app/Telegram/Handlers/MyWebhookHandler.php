@@ -334,7 +334,10 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 break;
             case '🛎️Support':
                 $this->chat->markdown("
-                    Reviews")->send();
+                *24/7 Customer Service Support*\n\n
+                We guarantee the provision of services at the highest level, availability 24 hours a day, 7 days a week, 365 days a year. You will enjoy your purchase and we are sure that you will return to us again.\n\n
+                *How to contact us*
+                ")->send();
                 break;
         }
     }
