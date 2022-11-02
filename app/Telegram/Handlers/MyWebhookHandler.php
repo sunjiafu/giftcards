@@ -357,9 +357,9 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                     }
 
                     $this->chat->markdown(
-                        'OrderId:'.$order->order_sn.
-                        'Product:'.$order->title.
-                        'Price:'.$order->price.
+                        'OrderId:'.$order->order_sn.'\n'.
+                        'Product:'.$order->title.'\n'.
+                        'Price:'.$order->price.'\n'.
                         'Code:'.$order->code)
                         
                         ->send();
