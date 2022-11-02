@@ -367,6 +367,10 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                         $order['status'] ='Expired';
                     }elseif ($order['status']== 1) {
                         $order['status'] ='Waitting Pay';
+                    }elseif ($order['status']) {
+
+                        $order['status'] = __('order.fields.status_completed');
+                        # code...
                     }
                     $this->chat->markdown(
                         '*OrderId*:'.$order['order_sn']."\n\n".
