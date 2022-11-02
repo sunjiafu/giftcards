@@ -333,7 +333,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             case '🛒All Giftcard':
                 break;
             case '☎️Support':
-                $this->chat->markdown(giftcard_telegram_get('content'))
+                $this->chat->markdown("{giftcard_telegram_get('content')}")
                 ->send();
                 break;
         }
