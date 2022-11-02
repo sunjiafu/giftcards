@@ -325,6 +325,11 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     protected function handleChatMessage(Stringable $text): void
     {
 
+
+        $buyeremail = $this->chat->chat_id . '@giftcardssupplier.com';
+
+        $orders = $this->ops->OrderSarchByemail($buyeremail)->toArray();
+
         switch ($text) {
 
 
@@ -346,27 +351,16 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 break;
         }
 
-        if ($text =='💳Myorder') {
+        if ($text == '💳Myorder') {
 
 
-            $buyeremail = $this->chat->chat_id . '@giftcardssupplier.com';
 
-            $orders = Order::where('buyeremail', $buyeremail)->orderBy('updated_at', 'desc')->take(5)->get();
 
             if (!$orders) {
 
                 $this->chat->markdown('You dont have an order')->send();
                 # code...
             }
-         
         }
-
-       
-      
-
-      
-
-
-
     }
 }
