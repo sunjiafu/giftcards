@@ -32,15 +32,18 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $this->usdtpay = $usdtpay;
         $this->btcpay = $btcpay;
     }
-
+    /* 启动机器人，发送欢迎信息，内联键盘+回复键盘+回复信息
+ */
     public function start(): void
     {
 
         $this->chat->markdown("🎉Welcome to Giftcard Discount bot🎉")->replyKeyboard(ReplyKeyboard::make()->buttons([
-            ReplyButton::make('Reviews'),
-            ReplyButton::make('All Giftcard')
+            ReplyButton::make('👉Reviews'),
+            ReplyButton::make('🛒All Giftcard'),
+            ReplyButton::make('🛎️Support'),
+            ReplyButton::make('🎫Myorder')
 
-        ]))->send();
+        ])->resize())->send();
         $this->chat->markdown("
         *Buy Giftcards Online best offer*
  
@@ -61,6 +64,8 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             ->send();
     }
 
+    /*     进入产品处理流程，产品列表>国家>面额>支付方式>付款>检查状态
+ */
     public function Product()
     {
         $this->chat->deleteMessage($this->messageId)->send();
@@ -80,7 +85,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
             ->send();
     }
-
+    /* 选择国家类目 */
     public function ProductCate()
     {
 
@@ -102,12 +107,13 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             ->keyboard(
                 Keyboard::make()
                     ->row($product)
-                    ->row([Button::make('BAck')->action('product'),])
+                    ->row([Button::make('🔙BAck')->action('product'),])
 
             )
 
             ->send();
     }
+    /* 选择面额 */
     public function Productdatil()
     {
 
@@ -147,14 +153,16 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             ->keyboard(
                 Keyboard::make()
                     ->row($productkeyboads)
-                    ->row([Button::make('BAck')->action('product'),])
+                    ->row([Button::make('🔙BAck')->action('product'),])
 
             )
 
             ->send();
     }
 
-
+    /* 创建订单写入数据库
+        设置过期时间
+        获取支付方式 */
     public function checkout()
     {
 
@@ -219,7 +227,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 Keyboard::make()
                     ->row($paykeyboad)
 
-                    ->row([Button::make('BAck')->action('product'),])
+                    ->row([Button::make('🔙BAck')->action('product'),])
 
 
             )
@@ -227,7 +235,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             ->send();
     }
 
-
+    /* 进入支付流程 */
     public function Bill()
     {
 
@@ -277,11 +285,15 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                         Button::make('Checkout')->webApp($checkoutlink),
                         Button::make('Check Order Status')->action('Orderstatus')->param('orderSn', $order->order_sn)
                     ])
-                    ->row([Button::make('BAck')->action('product')])
+                    ->row([Button::make('🔙BAck')->action('product')])
             )
             ->send();
     }
 
+    /*     获取当前订单状态
+            已过期
+            成功
+            等待支付 */
     public function Orderstatus()
     {
 
@@ -309,14 +321,17 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         }
     }
 
-    
+    //处理replykeyboard信息
     protected function handleChatMessage(Stringable $text): void
     {
-         switch($text){
+        switch ($text) {
 
             case 'Reviews':
                 $this->chat->markdown('reviews')->send();
                 break;
-         }
+            case 'All Giftcard':
+
+                break;
+        }
     }
 }
