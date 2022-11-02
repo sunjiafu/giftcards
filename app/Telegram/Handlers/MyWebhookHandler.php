@@ -337,7 +337,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
  <b>24/7 Customer Service Support <b>
  We guarantee the provision of services at the highest level, availability 24 hours a day, 7 days a week, 365 days a year. You will enjoy your purchase and we are sure that you will return to us again.
  <b>2How to contact us <b>
- 👉WhatsApp:<a href='https://wa.me/31623518851'>24/7 Support Giftcards</a>
+ 👉WhatsApp:<a href="https://wa.me/31623518851">24/7 Support Giftcards</a>
  👉Telegram:@DiscountGiftcard_support
 
  <b>We CAN help with the following <b>
