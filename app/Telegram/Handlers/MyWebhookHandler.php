@@ -352,14 +352,14 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
                 foreach ($orders as $order) {
 
-                    if ($order == null) {
+                    if (empty($order)) {
                         $this->chat->markdown('you dont have an order')->send();
                     }
 
                     $this->chat->markdown(
-                        'OrderId:'.$order->order_sn."\n".
-                        'Product:'.$order->title."\n".
-                        'Price:'.$order->price."\n".
+                        'OrderId:'.$order->order_sn."\n\n".
+                        'Product:'.$order->title."\n\n".
+                        'Price:'.$order->price."\n\n".
                         'Code:'.$order->code)
                         
                         ->send();
