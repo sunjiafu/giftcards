@@ -350,13 +350,18 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
                 
 
-                foreach ($orders as $order)
+                foreach ($orders as $order){
 
-                if (!$order) {
-                    $this->chat->markdown('you dont have an order')->send();
+                    if (!$order) {
+                        $this->chat->markdown('you dont have an order')->send();
+                    }
+    
+                        $this->chat->markdown($order->title)->send();
+
+
                 }
 
-                    $this->chat->markdown($order->title)->send();
+              
 
 
 
