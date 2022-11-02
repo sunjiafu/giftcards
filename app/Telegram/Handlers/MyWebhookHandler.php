@@ -40,7 +40,7 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $this->chat->markdown("🎉Welcome to Giftcard Discount bot🎉")->replyKeyboard(ReplyKeyboard::make()->buttons([
             ReplyButton::make('👉Reviews'),
             ReplyButton::make('🛒All Giftcard'),
-            ReplyButton::make('🛎️Support'),
+            ReplyButton::make('☎️Support'),
             ReplyButton::make('🎫Myorder')
 
         ])->chunk(2)->resize())->send();
@@ -332,13 +332,11 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 break;
             case '🛒All Giftcard':
                 break;
-            case '🛎️Support':
+            case '☎️Support':
                 $this->chat->markdown("
  *24/7 Customer Service Support*\nWe guarantee the provision of services at the highest level, availability 24 hours a day, 7 days a week, 365 days a year. You will enjoy your purchase and we are sure that you will return to us again.\n*How to contact us*
  👉WhatsApp:[24/7Support Giftcards](https://wa.me/31623518851)
- 👉Telegram:@DiscountGiftcard_support
- 👉Auto-shop:
-*We CAN help with the following*
+ 
 
                 ")->send();
                 break;
