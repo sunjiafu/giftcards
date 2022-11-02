@@ -330,14 +330,18 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
          
 
             case '👉Reviews':
-                $this->chat->markdown(giftcard_config_get('reviews'))->send();
+                $this->chat->markdown(giftcard_config_get('reviews'))
+                ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
+                ->send();
                 break;
             case '🛒All Giftcard':
-                $this->chat->markdown(giftcard_config_get('allgiftcard'))->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
+                $this->chat->markdown(giftcard_config_get('allgiftcard'))
+                ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
                 ->send();
                 break;
             case '☎️Support':
                 $this->chat->markdown(giftcard_config_get('support'))
+                ->keyboard(Keyboard::make()->row([Button::make('Shop Now')->action('product')]))
                 ->send();
                 break;
         }
