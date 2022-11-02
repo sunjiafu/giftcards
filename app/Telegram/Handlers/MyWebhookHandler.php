@@ -363,21 +363,21 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             } else {
                 foreach ($orders as $order) {
 
-                    if ($order['status']== -1) {
-                        $order['status'] ='Expired';
-                    }elseif ($order['status']== 1) {
-                        $order['status'] ='Waitting Pay';
-                    }elseif ($order['status']) {
+                    if ($order['status'] == Order::STATUS_COMPLETED) {
+                        $order['status'] = __('order.fields.status_expired');
+                    } elseif ($order['status'] == Order::STATUS_WAIT_PAY) {
+                        $order['status'] = 'Waitting Pay';
+                    } elseif ($order['status']== Order::STATUS_COMPLETED) {
 
                         $order['status'] = __('order.fields.status_completed');
                         # code...
                     }
                     $this->chat->markdown(
-                        '*OrderId*:'.$order['order_sn']."\n\n".
-                        '*Product*:'.$order['title']."\n\n".
-                        '*Price*:'.$order['price']."\n\n".
-                        '*Status*:'.$order['status']."\n\n".
-                        '*Code*:'.$order['code']
+                        '*OrderId*:' . $order['order_sn'] . "\n\n" .
+                            '*Product*:' . $order['title'] . "\n\n" .
+                            '*Price*:' . $order['price'] . "\n\n" .
+                            '*Status*:' . $order['status'] . "\n\n" .
+                            '*Code*:' . $order['code']
                     )->send();
                 }
             }
