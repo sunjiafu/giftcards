@@ -362,6 +362,10 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 # code...
             } else {
                 foreach ($orders as $order) {
+
+                    if ($order['status']== -1) {
+                        $order['status'] ='Expired';
+                    }
                     $this->chat->markdown(
                         '*OrderId*:'.$order['order_sn']."\n\n".
                         '*Product*:'.$order['title']."\n\n".
