@@ -358,16 +358,21 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
             if (!$orders) {
 
-                $this->chat->markdown('You dont have an order')->send();
+                $this->chat->markdown('You dont have an order')
+                    ->keyboard(Keyboard::make()->row([
+
+                        Button::make('🛒Shop Now')->action('product')
+                    ]))
+                    ->send();
                 # code...
             } else {
                 foreach ($orders as $order) {
 
                     if ($order['status'] == Order::STATUS_COMPLETED) {
-                        $order['status'] = __('rder.fields.status_completed');
+                        $order['status'] = __('order.fields.status_completed');
                     } elseif ($order['status'] == Order::STATUS_WAIT_PAY) {
                         $order['status'] = 'Waitting Pay';
-                    } elseif ($order['status']== Order::STATUS_EXPIRED) {
+                    } elseif ($order['status'] == Order::STATUS_EXPIRED) {
 
                         $order['status'] = __('order.fields.status_expired');
                         # code...
