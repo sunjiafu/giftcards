@@ -53,7 +53,7 @@ class SystemSetting extends Form
 
             
 
-        )->action('https://giftcardssupplier.com/callback');
+        )->action('https://giftcardssupplier.com/callback')->method('Get');
     }
 
     /**
