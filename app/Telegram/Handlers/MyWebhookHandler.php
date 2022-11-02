@@ -345,23 +345,27 @@ class MyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                     ->send();
                 break;
             case '💳Myorder':
-                $buyeremail = $this->chat->chat_id .'@giftcardssupplier.com';
-                $orders = Order::where('buyeremail',$buyeremail)->orderBy('updated_at', 'desc')->take(5)->get();
+                $buyeremail = $this->chat->chat_id . '@giftcardssupplier.com';
+                $orders = Order::where('buyeremail', $buyeremail)->orderBy('updated_at', 'desc')->take(5)->get();
 
-                
 
-                foreach ($orders as $order){
 
-                    if (!$order) {
+                foreach ($orders as $order) {
+
+                    if ($order == null) {
                         $this->chat->markdown('you dont have an order')->send();
                     }
-    
-                        $this->chat->markdown($order->title)->send();
 
-
+                    $this->chat->markdown(
+                        'OrderId:'.$order->order_sn.
+                        'Product:'.$order->title.
+                        'Price:'.$order->price.
+                        'Code:'.$order->code)
+                        
+                        ->send();
                 }
 
-              
+
 
 
 
