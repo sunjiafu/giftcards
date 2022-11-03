@@ -5,6 +5,8 @@ namespace App\Admin\Forms;
 use Dcat\Admin\Widgets\Form;
 use Illuminate\Support\Facades\Cache;
 
+use Illuminate\Support\Facades\Http;
+
 class SystemSetting extends Form
 {
     /**
@@ -42,6 +44,8 @@ class SystemSetting extends Form
             'TelggramBot',
             function () {
 
+
+
                 $this->markdown('support', '服务支持回复内容')->required();
 
                 $this->markdown('reviews', '评论回复内容')->required();
@@ -50,9 +54,30 @@ class SystemSetting extends Form
             }
 
 
+        )->savedScript();
 
-        )->savedScript(url('forwardmessage'));
+        $this->tab(
+            'Tg内容转发',
+            function () {
+
+
+
+                $this->text('chatid','userId');
+
+                $this->text('messageId','MessageId');
+
+                
+            }
+
+
+        );
     }
+
+
+   
+
+
+
 
     /**
      * The data of the form.

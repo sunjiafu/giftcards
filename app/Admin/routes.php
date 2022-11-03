@@ -24,4 +24,5 @@ Route::group([
     $router->get('import-carmis', 'CarmiController@importCarmis');
     $router->get('system-set', 'SystemSettingController@systemSetting');
     $router->get('tgsendreviews','SystemSettingController@tgSendreviews');
+    $router->get('tgsent-forward','TelegramForwardmessageController@telegramForwardmessage');
 });

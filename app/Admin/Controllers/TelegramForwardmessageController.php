@@ -10,14 +10,14 @@
 namespace App\Admin\Controllers;
 
 
-use App\Admin\Forms\SystemSetting;
+use App\Admin\Forms\TelegramForwardmessage;
 use App\Admin\Forms\TgsendReviews;
 use Dcat\Admin\Http\Controllers\AdminController;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Card;
 
 
-class SystemSettingController extends AdminController
+class TelegramForwardmessageController extends AdminController
 {
 
     /**
@@ -30,11 +30,11 @@ class SystemSettingController extends AdminController
      * @copyright assimon<ashang@utf8.hk>
      * @link      http://utf8.hk/
      */
-    public function systemSetting(Content $content)
+    public function TelegramForwardmessage(Content $content)
     {
         return $content
-            ->title('系统设置')
-            ->body(new Card(new SystemSetting()));
+            ->title('转发设置')
+            ->body(new Card(new TelegramForwardmessage()));
     }
 
    

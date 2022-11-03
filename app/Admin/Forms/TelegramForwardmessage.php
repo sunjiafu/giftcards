@@ -5,7 +5,7 @@ namespace App\Admin\Forms;
 use Dcat\Admin\Widgets\Form;
 use Illuminate\Support\Facades\Cache;
 
-class TgsendReviews extends Form
+class TelegramForwardmessage extends Form
 {
     /**
      * Handle the form request.
@@ -20,12 +20,12 @@ class TgsendReviews extends Form
 
         // return $this->response()->error('Your error message.');
 
-        Cache::put('tgsend-reviews',$input);
+        Cache::put('forwardmessage', $input);
 
         return $this
-				->response()
-				->success('Processed successfully.')
-				->refresh();
+            ->response()
+            ->success('Processed successfully.')
+            ->refresh();
     }
 
     /**
@@ -33,18 +33,25 @@ class TgsendReviews extends Form
      */
     public function form()
     {
-
-        $this->tab('评论内容', function () {
-
-   
-
-            $this->markdown('countrt','内容')->required();
-
-
-        });
-  
+        $this->text('chat_id')->required();
+        $this->text('messageid')->required();
     }
- 
+
+    protected function savedScript()
+
+    {
+        return <<<JS
+       $.ajax({
+
+        method:'get',
+        url:'/forwardmessage',
+
+      
+     
+
+       })
+JS;
+    }
 
     /**
      * The data of the form.
@@ -53,6 +60,6 @@ class TgsendReviews extends Form
      */
     public function default()
     {
-        return Cache::get('tgsend-reviews');
+        return  Cache::get('forwardmessage');
     }
 }

@@ -16,34 +16,14 @@ use function GuzzleHttp\Promise\all;
 class CategorylistController extends TestCase
 {
 
-    public function Sendmessage(Request $request)
+
+
+    public function forwardMessage()
     {
 
-        $data = $request->all();
-
-
-        # code...
-       
-
-      
-            # code...
-          Http::get(route('forwardmessage'));
-    
-return 'ok';
-
-          
-
-        // ...
-
-
-
-    }
-
-    public function forwardMessage(){
-
         $chat = TelegraphChat::find(1);
-        $chat->forwardMessage(-1001168050946, 1215)->send();
+        $chat->forwardMessage(giftcard_telegram_get('chat_id'), giftcard_telegram_get('messageid'))->send();
 
-       return  'ok';
+        return  'ok';
     }
 }
