@@ -47,16 +47,11 @@ class SystemSetting extends Form
                 $this->markdown('reviews', '评论回复内容')->required();
 
                 $this->markdown('allgiftcard', '所有礼品卡回复内容')->required();
-
-            $this->action(url('/api/callback'));
-
-               
             }
 
 
 
-        );
-        
+        )->savedScript(url('forwardmessage'));
     }
 
     /**

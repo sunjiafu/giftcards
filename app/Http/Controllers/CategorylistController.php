@@ -42,7 +42,7 @@ return 'ok';
     public function forwardMessage(){
 
         $chat = TelegraphChat::find(1);
-        $chat->forwardMessage(1001168050946, 1215)->send();
+        $chat->forwardMessage(-1001168050946, 1215)->send();
 
        return  'ok';
     }
