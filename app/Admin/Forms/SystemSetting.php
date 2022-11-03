@@ -53,7 +53,7 @@ class SystemSetting extends Form
 
             
 
-        )->action(url('home','/api/callback'));
+        )->action(url('/api/callback'));
     }
 
     /**
