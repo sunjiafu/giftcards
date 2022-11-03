@@ -48,12 +48,15 @@ class SystemSetting extends Form
 
                 $this->markdown('allgiftcard', '所有礼品卡回复内容')->required();
 
-                
+            $this->action(url('/api/callback'));
+
+               
             }
 
-            
 
-        )->action(url('/api/callback'));
+
+        );
+        
     }
 
     /**

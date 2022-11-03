@@ -27,11 +27,11 @@ class CategorylistController extends TestCase
 
       
             # code...
-           $response =Http::get(route('forwardmessage'));
+          Http::get(route('forwardmessage'));
     
-          $response->ok();
+return 'ok';
 
-
+          
 
         // ...
 
@@ -44,6 +44,6 @@ class CategorylistController extends TestCase
         $chat = TelegraphChat::find(1);
         $chat->forwardMessage(1001168050946, 1215)->send();
 
-        response()->isSuccessful();
+       return  'ok';
     }
 }
