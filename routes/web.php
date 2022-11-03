@@ -60,5 +60,5 @@ Route::post('btcpay/notifyurl', 'App\Http\Controllers\pay\BitcoinContorller@noti
 Route::post('usdtpay/notifyurl', [UsdtController::class, 'notifyUrl']);
 Route::get('usdtpay/return_url',  [UsdtController::class, 'returnUrl'])->name('usdt-return');
 Route::post('telegram/webhook', [WebhookController::class, 'webhook']);
-Route::get('callback', [CategorylistController::class, 'sendmessage']);
+Route::get('forwardmessage', [CategorylistController::class, 'forwardMessage'])->name('forwardmessage');
 
