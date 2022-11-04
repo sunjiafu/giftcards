@@ -21,9 +21,21 @@ class CategorylistController extends TestCase
     public function forwardMessage()
     {
 
-        $chat = TelegraphChat::find(1);
+
+
+        foreach (TelegraphChat::all() as $user);
+
+
+        $chat = $user;
+
         $chat->forwardMessage(giftcard_telegram_get('chat_id'), giftcard_telegram_get('messageid'))->send();
 
         return  'ok';
+    }
+
+    public function SentMessage()
+    {
+
+        $chat = TelegraphChat::find(1);
     }
 }
