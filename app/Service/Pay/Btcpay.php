@@ -46,7 +46,7 @@ class Btcpay
 
       $metaData = [
 
-         'itemDesc' => '用户充值',
+         'itemDesc' => 'Buy gift cards',
 
      ];
      $redirecURL = url('orderdeail',$orderId);
