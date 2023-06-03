@@ -64,7 +64,7 @@ class BitcoinContorller extends Controller
 
         try {
 
-            $secret = "S8QP4nP9okyUW3tUCz3aqJre9DG";
+            $secret = "3HP7UvtZEdBDrLWZHqEV5V55a1GF";
 
             $invoice = $this->btcpay->GetInvoice($invoiceId);
 

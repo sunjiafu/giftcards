@@ -39,7 +39,7 @@ class Bill extends Component
 
                 break;
 
-            case (1):
+            case (3):
 
                 $amount = PreciseNumber::parseString($this->order->price);
 

@@ -24,7 +24,7 @@ class Btcpay
 
    {
 
-      $this->paygetway = Pay::find(1);
+      $this->paygetway = Pay::find(3);
 
       $this->apiKey = $this->paygetway->apikey;
 

@@ -53,7 +53,7 @@
                             </div>
                             <div class="flex flex-col py-3">
                                 <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Payment Method</dt>
-                                @if($order->pay_id == 1)
+                                @if($order->pay_id == 3)
                                 <dd class="text-lg font-semibold">Bitcoin</dd>
                                 @else($order->pay_id == 2)
                                 <dd class="text-lg font-semibold">USDT</dd>
